@@ -17,7 +17,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AnimatedSection from "@/components/animations/AnimatedSection";
 import GsapReveal from "@/components/animations/GsapReveal";
-import ParallaxImage from "@/components/animations/ParallaxImage";
+
 import StatsSection from "@/components/sections/Stats";
 import CTASection from "@/components/sections/CTA";
 
@@ -90,11 +90,15 @@ export default function AboutPage() {
       <main>
         {/* Hero Banner */}
         <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
-          <ParallaxImage
+          <Image
             src="/images/2.jpeg"
             alt="About Jom Rich Energy"
-            className="absolute inset-0"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy-dark/70 via-navy-dark/40 to-navy-dark/80" />
           <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}

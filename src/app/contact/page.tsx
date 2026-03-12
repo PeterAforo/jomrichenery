@@ -14,7 +14,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AnimatedSection from "@/components/animations/AnimatedSection";
-import ParallaxImage from "@/components/animations/ParallaxImage";
+import Image from "next/image";
 import { defaultSiteSettings } from "@/lib/cms-data";
 
 export default function ContactPage() {
@@ -81,11 +81,15 @@ export default function ContactPage() {
       <main>
         {/* Hero Banner */}
         <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center overflow-hidden">
-          <ParallaxImage
+          <Image
             src="/images/2.jpeg"
             alt="Contact Us"
-            className="absolute inset-0"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy-dark/70 via-navy-dark/40 to-navy-dark/80" />
           <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
