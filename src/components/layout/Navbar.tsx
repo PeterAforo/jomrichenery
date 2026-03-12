@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import gsap from "gsap";
 import { Menu, X, ChevronDown, Phone, Mail } from "lucide-react";
 import { NavItem, SiteSettings, defaultNavItems, defaultSiteSettings } from "@/lib/cms-data";
 
@@ -12,8 +11,6 @@ export default function Navbar({ navItems: propNavItems, settings: propSettings 
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
-  const linksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,25 +18,6 @@ export default function Navbar({ navItems: propNavItems, settings: propSettings 
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (logoRef.current && linksRef.current) {
-      gsap.from(logoRef.current, {
-        x: -50,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      });
-      gsap.from(linksRef.current.children, {
-        y: -20,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-        delay: 0.3,
-      });
-    }
   }, []);
 
   const settings = propSettings ?? defaultSiteSettings;
@@ -99,7 +77,12 @@ export default function Navbar({ navItems: propNavItems, settings: propSettings 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <div ref={logoRef} className="flex-shrink-0">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="flex-shrink-0"
+            >
               <Link href="/" className="flex items-center">
                 <Image
                   src={settings.logo}
@@ -112,13 +95,16 @@ export default function Navbar({ navItems: propNavItems, settings: propSettings 
                   priority
                 />
               </Link>
-            </div>
+            </motion.div>
 
             {/* Desktop Nav */}
-            <div ref={linksRef} className="hidden lg:flex items-center gap-1">
-              {navItems.map((item) => (
-                <div
+            <div className="hidden lg:flex items-center gap-1">
+              {navItems.map((item, index) => (
+                <motion.div
                   key={item.id}
+                  initial={{ opacity: 0, y: -15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.2 + index * 0.08, ease: "easeOut" }}
                   className="relative"
                   onMouseEnter={() =>
                     item.children && setActiveDropdown(item.id)
@@ -166,7 +152,7 @@ export default function Navbar({ navItems: propNavItems, settings: propSettings 
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
+                </motion.div>
               ))}
             </div>
 
