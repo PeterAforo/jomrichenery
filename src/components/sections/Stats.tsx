@@ -104,7 +104,7 @@ export default function StatsSection({ stats: propStats }: { stats?: Stat[] }) {
               <div className="text-4xl lg:text-6xl font-bold text-white mb-3 tracking-tight">
                 <CountUp target={stat.value} suffix={stat.suffix || ""} />
               </div>
-              <div className="text-sm font-medium uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.5)" }}>
+              <div className="text-sm font-medium uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.75)" }}>
                 {stat.label}
               </div>
               <div className="h-0.5 mx-auto mt-4" style={{ width: 32, backgroundColor: "rgba(245,146,27,0.5)" }} />

@@ -1,10 +1,7 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 interface GsapRevealProps {
   children: React.ReactNode;
@@ -20,64 +17,66 @@ export default function GsapReveal({
   className = "",
   animation = "fadeUp",
   delay = 0,
-  duration = 1,
+  duration = 0.7,
   staggerAmount = 0.15,
 }: GsapRevealProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
+  const directions: Record<string, { y?: number; x?: number; scale?: number }> = {
+    fadeUp: { y: 60 },
+    fadeIn: {},
+    slideLeft: { x: -80 },
+    slideRight: { x: 80 },
+    scale: { scale: 0.85 },
+    stagger: { y: 40 },
+  };
 
-    const animations: Record<string, gsap.TweenVars> = {
-      fadeUp: { y: 80, opacity: 0 },
-      fadeIn: { opacity: 0 },
-      slideLeft: { x: -100, opacity: 0 },
-      slideRight: { x: 100, opacity: 0 },
-      scale: { scale: 0.8, opacity: 0 },
-      stagger: { y: 50, opacity: 0 },
-    };
+  const from = directions[animation];
 
-    const from = animations[animation];
-
-    if (animation === "stagger") {
-      const children = el.children;
-      gsap.from(children, {
-        ...from,
-        duration,
-        delay,
-        stagger: staggerAmount,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      });
-    } else {
-      gsap.from(el, {
-        ...from,
-        duration,
-        delay,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      });
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => {
-        if (t.trigger === el) t.kill();
-      });
-    };
-  }, [animation, delay, duration, staggerAmount]);
+  if (animation === "stagger") {
+    const items = React.Children.toArray(children);
+    return (
+      <div ref={ref} className={className}>
+        {items.map((child, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: from.y ?? 0, x: from.x ?? 0, scale: from.scale ?? 1 }}
+            animate={
+              isInView
+                ? { opacity: 1, y: 0, x: 0, scale: 1 }
+                : { opacity: 0, y: from.y ?? 0, x: from.x ?? 0, scale: from.scale ?? 1 }
+            }
+            transition={{
+              duration,
+              delay: delay + i * staggerAmount,
+              ease: [0.25, 0.4, 0.25, 1],
+            }}
+          >
+            {child}
+          </motion.div>
+        ))}
+      </div>
+    );
+  }
 
   return (
-    <div ref={containerRef} className={className}>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: from.y ?? 0, x: from.x ?? 0, scale: from.scale ?? 1 }}
+      animate={
+        isInView
+          ? { opacity: 1, y: 0, x: 0, scale: 1 }
+          : { opacity: 0, y: from.y ?? 0, x: from.x ?? 0, scale: from.scale ?? 1 }
+      }
+      transition={{
+        duration,
+        delay,
+        ease: [0.25, 0.4, 0.25, 1],
+      }}
+      className={className}
+    >
       {children}
-    </div>
+    </motion.div>
   );
 }

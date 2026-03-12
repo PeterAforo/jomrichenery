@@ -1,13 +1,8 @@
 "use client";
 
-import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AnimatedSection from "@/components/animations/AnimatedSection";
 import { Partner } from "@/lib/cms-data";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const defaultPartnerList = [
   { name: "Shell", color: "#DD1D21" },
@@ -19,32 +14,9 @@ const defaultPartnerList = [
 ];
 
 export default function PartnersSection({ partners: propPartners }: { partners?: Partner[] }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    const items = el.querySelectorAll(".partner-item");
-    gsap.from(items, {
-      scale: 0.8,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 85%",
-        toggleActions: "play none none none",
-      },
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => {
-        if (t.trigger === el) t.kill();
-      });
-    };
-  }, []);
+  const partnerList = propPartners && propPartners.length > 0
+    ? propPartners.map(p => ({ name: p.name, color: "#1B2A4A" }))
+    : defaultPartnerList;
 
   return (
     <section className="py-20 relative" style={{ backgroundColor: "#f9fafb" }}>
@@ -74,18 +46,16 @@ export default function PartnersSection({ partners: propPartners }: { partners?:
           </AnimatedSection>
         </div>
 
-        <div
-          ref={scrollRef}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6"
-        >
-          {(propPartners && propPartners.length > 0
-            ? propPartners.map(p => ({ name: p.name, color: "#1B2A4A" }))
-            : defaultPartnerList
-          ).map((partner) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {partnerList.map((partner, index) => (
             <motion.div
               key={partner.name}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -4, scale: 1.05 }}
-              className="partner-item rounded-2xl p-6 flex items-center justify-center h-28 transition-all duration-300 group cursor-pointer"
+              className="rounded-2xl p-6 flex items-center justify-center h-28 transition-colors duration-300 group cursor-pointer"
               style={{
                 backgroundColor: "white",
                 border: "1px solid #e5e7eb",
