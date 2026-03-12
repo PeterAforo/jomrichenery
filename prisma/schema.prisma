@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model SiteSettings {
+  id           String   @id @default("default")
+  siteName     String   @default("Jom Rich Energy Ltd.")
+  tagline      String   @default("Powering Progress, Fueling the Future")
+  description  String   @default("")
+  logo         String   @default("/images/logo.png")
+  favicon      String   @default("/images/favicon.png")
+  email        String   @default("")
+  phone        String   @default("")
+  address      String   @default("")
+  socialLinks  Json     @default("{}")
+  updatedAt    DateTime @updatedAt
+}
+
+model HeroSlide {
+  id                String  @id @default(cuid())
+  title             String
+  subtitle          String
+  description       String
+  image             String
+  ctaText           String
+  ctaLink           String
+  secondaryCtaText  String?
+  secondaryCtaLink  String?
+  order             Int     @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  icon        String
+  features    Json     @default("[]")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Stat {
+  id        String   @id @default(cuid())
+  value     String
+  label     String
+  suffix    String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  company   String
+  quote     String
+  rating    Int      @default(5)
+  image     String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Partner {
+  id        String   @id @default(cuid())
+  name      String
+  logo      String   @default("")
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Station {
+  id        String   @id @default(cuid())
+  name      String
+  address   String
+  city      String
+  region    String
+  services  Json     @default("[]")
+  hours     String   @default("24/7")
+  phone     String?
+  lat       Float?
+  lng       Float?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model NavItem {
+  id        String    @id @default(cuid())
+  label     String
+  href      String
+  parentId  String?
+  parent    NavItem?  @relation("NavChildren", fields: [parentId], references: [id], onDelete: Cascade)
+  children  NavItem[] @relation("NavChildren")
+  order     Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model FooterColumn {
+  id        String   @id @default(cuid())
+  title     String
+  links     Json     @default("[]")
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Page {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String   @default("")
+  blocks      Json     @default("[]")
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
