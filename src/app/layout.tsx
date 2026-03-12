@@ -18,8 +18,11 @@ export const metadata: Metadata = {
   description:
     "Jom Rich Energy Company Limited is a leading petroleum products distributor in Ghana, providing quality fuel and energy solutions to businesses and consumers.",
   icons: {
-    icon: "/images/favicon.png",
-    apple: "/images/favicon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32", type: "image/png" },
+      { url: "/icon.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: "/apple-icon.png",
   },
   openGraph: {
     title: "Jom Rich Energy Ltd.",
