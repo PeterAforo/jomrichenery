@@ -12,6 +12,9 @@ import {
   Target,
   Eye,
   Heart,
+  Linkedin,
+  Twitter,
+  Mail,
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -20,6 +23,7 @@ import GsapReveal from "@/components/animations/GsapReveal";
 
 import StatsSection from "@/components/sections/Stats";
 import CTASection from "@/components/sections/CTA";
+import { teamMembers } from "@/lib/team-data";
 
 const values = [
   {
@@ -54,28 +58,6 @@ const values = [
   },
 ];
 
-const team = [
-  {
-    name: "ISAAC ABANGA",
-    role: "Founder & Chief Executive Officer",
-    bio: "Isaac Abanga is an executive leader, Petroleum Economist, and entrepreneur with over 21 years of progressive experience in Ghana's downstream petroleum industry and West Africa's energy trading environment. He has risen through leadership ranks to serve as General Manager across three Oil Marketing Companies (OMCs) and has also led regional trading operations within a multinational petroleum and petrochemical context. Across his career, Isaac has demonstrated strong capability in business restructuring, commercial strategy, petroleum pricing, operational governance, retail network expansion, and regulatory engagement.",
-  },
-  {
-    name: "RICHARD OWUSU",
-    role: "Chief Operations Officer",
-    bio: "Richard oversees all operational activities, ensuring efficiency and excellence across all stations and distribution networks.",
-  },
-  {
-    name: "GRACE ADJEI",
-    role: "Head of Finance",
-    bio: "Grace brings financial expertise and strategic planning to drive the company's fiscal health and ensure sustainable growth.",
-  },
-  {
-    name: "KWADWO BOATENG",
-    role: "Head of Distribution",
-    bio: "Kwadwo manages the nationwide distribution network, ensuring timely fuel delivery across Ghana with operational excellence.",
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -278,25 +260,77 @@ export default function AboutPage() {
             </div>
 
             <GsapReveal animation="stagger" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {team.map((member, index) => (
+              {teamMembers.map((member) => (
                 <motion.div
-                  key={member.name}
+                  key={member.slug}
                   whileHover={{ y: -8 }}
-                  className="bg-gray-50 rounded-2xl overflow-hidden group hover:shadow-xl transition-all duration-500"
+                  className="bg-gray-50 rounded-2xl overflow-hidden group hover:shadow-xl transition-all duration-500 flex flex-col"
                 >
-                  <div className="h-48 bg-gradient-to-br from-navy to-navy-light flex items-center justify-center">
-                    <div className="w-24 h-24 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center text-white text-3xl font-bold">
-                      {member.name.charAt(0)}
+                  {/* Image / Avatar */}
+                  <div className="h-56 bg-gradient-to-br from-navy to-navy-light flex items-center justify-center relative overflow-hidden">
+                    {member.image ? (
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        fill
+                        className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="w-28 h-28 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center text-white text-4xl font-bold">
+                        {member.name.charAt(0)}
+                      </div>
+                    )}
+                    {/* Social Icons Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 pb-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                      {member.social.linkedin && (
+                        <a
+                          href={member.social.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-9 h-9 rounded-full bg-white/90 flex items-center justify-center text-navy hover:bg-orange hover:text-white transition-all shadow-md"
+                        >
+                          <Linkedin size={16} />
+                        </a>
+                      )}
+                      {member.social.twitter && (
+                        <a
+                          href={member.social.twitter}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-9 h-9 rounded-full bg-white/90 flex items-center justify-center text-navy hover:bg-orange hover:text-white transition-all shadow-md"
+                        >
+                          <Twitter size={16} />
+                        </a>
+                      )}
+                      {member.social.email && (
+                        <a
+                          href={`mailto:${member.social.email}`}
+                          className="w-9 h-9 rounded-full bg-white/90 flex items-center justify-center text-navy hover:bg-orange hover:text-white transition-all shadow-md"
+                        >
+                          <Mail size={16} />
+                        </a>
+                      )}
                     </div>
                   </div>
-                  <div className="p-6">
+
+                  {/* Content */}
+                  <div className="p-6 flex flex-col flex-1">
                     <h3 className="font-bold text-navy text-lg">
                       {member.name}
                     </h3>
                     <p className="text-orange text-sm font-medium mb-3">
                       {member.role}
                     </p>
-                    <p className="text-gray-500 text-sm">{member.bio}</p>
+                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-3 flex-1">
+                      {member.excerpt}
+                    </p>
+                    <Link
+                      href={`/about/team/${member.slug}`}
+                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-orange hover:text-orange-dark transition-colors group/link"
+                    >
+                      Read More
+                      <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                    </Link>
                   </div>
                 </motion.div>
               ))}
