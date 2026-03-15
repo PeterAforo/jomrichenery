@@ -134,14 +134,14 @@ export interface Page {
 // Default CMS Data
 export const defaultSiteSettings: SiteSettings = {
   siteName: "Jom Rich Energy Ltd.",
-  tagline: "Powering Progress, Fueling the Future",
+  tagline: "Powering Progress.",
   description:
-    "Jom Rich Energy Company Limited is a leading petroleum products distributor in Ghana, providing quality fuel and energy solutions to businesses and consumers.",
+    "Jom Rich Energy Company Limited provides integrated oil and gas services, bulk petroleum distribution, and innovative fuel automation systems with uncompromising standards of safety, quality, and integrity.",
   logo: "/images/logo.png",
   favicon: "/images/favicon.png",
   email: "info@jomrichenergy.com",
-  phone: "+233 30 000 0000",
-  address: "Accra, Ghana",
+  phone: "+233 303 324 081",
+  address: "FL25, Golf City Main Street, Tema",
   socialLinks: {
     facebook: "https://facebook.com/jomrichenergy",
     twitter: "https://twitter.com/jomrichenergy",

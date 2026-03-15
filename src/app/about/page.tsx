@@ -24,62 +24,56 @@ import CTASection from "@/components/sections/CTA";
 const values = [
   {
     icon: Shield,
-    title: "Safety",
-    description:
-      "We prioritize safety in every operation, from transportation to retail distribution, ensuring the well-being of our employees and communities.",
+    title: "Integrity",
+    description: "We operate transparently and ethically in every aspect of our business, building lasting trust with our partners and customers.",
   },
   {
     icon: Award,
+    title: "Safety First",
+    description: "We prioritize safety in all operations, from transportation to retail distribution, ensuring the well-being of our employees and communities.",
+  },
+  {
+    icon: Target,
     title: "Excellence",
-    description:
-      "We strive for operational excellence in everything we do, from product quality to customer service delivery.",
-  },
-  {
-    icon: Heart,
-    title: "Integrity",
-    description:
-      "We conduct business with the highest ethical standards, building trust through transparency and accountability.",
-  },
-  {
-    icon: Users,
-    title: "Community",
-    description:
-      "We are committed to the development of the communities we serve, creating jobs and supporting local initiatives.",
+    description: "We deliver beyond expectations through uncompromising standards of quality, service, and operational performance.",
   },
   {
     icon: Zap,
     title: "Innovation",
-    description:
-      "We embrace modern technology and innovative solutions to improve efficiency and better serve our customers.",
+    description: "We embrace modern fuel automation and energy technologies to drive efficiency and better serve our customers.",
   },
   {
-    icon: Target,
+    icon: Users,
     title: "Reliability",
-    description:
-      "Our customers count on us for consistent, timely delivery of quality petroleum products across the nation.",
+    description: "We are dependable partners in energy supply, delivering consistent quality and service when our customers need us most.",
+  },
+  {
+    icon: Heart,
+    title: "Sustainability",
+    description: "We operate responsibly toward our environment and the communities we serve, ensuring a sustainable energy future.",
   },
 ];
 
 const team = [
   {
-    name: "Joseph Mensah",
-    role: "Chief Executive Officer",
-    bio: "With over 20 years in the energy sector, Joseph leads Jom Rich with a vision for sustainable growth.",
+    name: "ISAAC ABANGA",
+    role: "Founder & Chief Executive Officer",
+    bio: "Isaac Abanga is an executive leader, Petroleum Economist, and entrepreneur with over 21 years of progressive experience in Ghana's downstream petroleum industry and West Africa's energy trading environment. He has risen through leadership ranks to serve as General Manager across three Oil Marketing Companies (OMCs) and has also led regional trading operations within a multinational petroleum and petrochemical context. Across his career, Isaac has demonstrated strong capability in business restructuring, commercial strategy, petroleum pricing, operational governance, retail network expansion, and regulatory engagement.",
   },
   {
-    name: "Richael Owusu",
+    name: "RICHARD OWUSU",
     role: "Chief Operations Officer",
-    bio: "Richael oversees all operational activities, ensuring efficiency and excellence across all stations.",
+    bio: "Richard oversees all operational activities, ensuring efficiency and excellence across all stations and distribution networks.",
   },
   {
-    name: "Grace Adjei",
+    name: "GRACE ADJEI",
     role: "Head of Finance",
-    bio: "Grace brings financial expertise and strategic planning to drive the company's fiscal health.",
+    bio: "Grace brings financial expertise and strategic planning to drive the company's fiscal health and ensure sustainable growth.",
   },
   {
-    name: "Kwadwo Boateng",
+    name: "KWADWO BOATENG",
     role: "Head of Distribution",
-    bio: "Kwadwo manages the nationwide distribution network, ensuring timely fuel delivery across Ghana.",
+    bio: "Kwadwo manages the nationwide distribution network, ensuring timely fuel delivery across Ghana with operational excellence.",
   },
 ];
 
@@ -127,28 +121,25 @@ export default function AboutPage() {
               <div>
                 <AnimatedSection>
                   <h2 className="text-3xl lg:text-5xl font-bold text-navy mb-6">
-                    Fueling Ghana&apos;s{" "}
-                    <span className="text-gradient">Progress</span> Since Day One
+                    Powering{" "}
+                    <span className="text-gradient">Progress</span> Across Ghana
                   </h2>
                 </AnimatedSection>
 
                 <AnimatedSection delay={0.1}>
                   <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                    Jom Rich Energy Company Limited was founded with a clear
-                    mission: to become Ghana&apos;s most trusted petroleum products
-                    distributor. From our humble beginnings, we have grown into a
-                    nationwide network of fuel stations serving thousands of
-                    customers daily.
+                    Jom Rich Energy Company Limited provides integrated oil and gas services, 
+                    bulk petroleum distribution, and innovative fuel automation systems with uncompromising 
+                    standards of safety, quality, and integrity. We serve as a trusted partner 
+                    in Ghana's energy sector and West Africa's trading environment.
                   </p>
                 </AnimatedSection>
 
                 <AnimatedSection delay={0.2}>
                   <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                    Our commitment to quality, safety, and customer satisfaction
-                    has earned us partnerships with major international oil
-                    companies and the trust of communities across Ghana. We
-                    continue to expand our reach while maintaining the highest
-                    standards in the industry.
+                    Our commitment to operational excellence and customer satisfaction has established us 
+                    as a reliable energy partner, delivering consistent quality petroleum products 
+                    and services across the nation.
                   </p>
                 </AnimatedSection>
 
@@ -167,7 +158,7 @@ export default function AboutPage() {
                 <div className="relative">
                   <Image
                     src="/images/1.jpeg"
-                    alt="Jom Rich Tanker"
+                    alt="Jom Rich Operations"
                     width={600}
                     height={450}
                     className="rounded-2xl shadow-2xl"
@@ -192,10 +183,9 @@ export default function AboutPage() {
                     Our Mission
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
-                    To be the leading provider of quality petroleum products and
-                    energy solutions in Ghana, delivering exceptional value to our
-                    customers through reliable supply, competitive pricing, and
-                    outstanding service at every touchpoint.
+                    To provide integrated oil and gas services, bulk petroleum distribution, 
+                    and innovative fuel automation systems with uncompromising standards of safety, 
+                    quality, and integrity.
                   </p>
                 </div>
               </AnimatedSection>
@@ -209,10 +199,8 @@ export default function AboutPage() {
                     Our Vision
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
-                    To become West Africa&apos;s most trusted and innovative energy
-                    company, driving economic growth and sustainable development
-                    through cutting-edge fuel distribution and customer-first
-                    energy solutions.
+                    To build a resilient energy brand that drives economic growth and 
+                    fuels Africa's industrial transformation.
                   </p>
                 </div>
               </AnimatedSection>
