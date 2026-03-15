@@ -18,7 +18,7 @@ export const teamMembers: TeamMember[] = [
   {
     slug: "isaac-abanga",
     name: "Isaac Abanga",
-    role: "Founder & Chief Executive Officer",
+    role: "Chief Executive Officer",
     excerpt:
       "Executive leader, Petroleum Economist, and entrepreneur with over 21 years of progressive experience in Ghana\u2019s downstream petroleum industry.",
     bio: [
