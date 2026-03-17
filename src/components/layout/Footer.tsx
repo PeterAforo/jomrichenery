@@ -112,11 +112,24 @@ export default function Footer({ settings: propSettings, columns: propColumns }:
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 gap-6">
-          <div className="flex items-center gap-2 text-white/40 text-sm">
-            <Fuel size={16} className="text-orange" />
-            <span>
-              © {new Date().getFullYear()} {settings.siteName}. All rights
-              reserved.
+          <div className="flex flex-col items-center md:items-start gap-1 text-white/40 text-sm">
+            <div className="flex items-center gap-2">
+              <Fuel size={16} className="text-orange" />
+              <span>
+                © {new Date().getFullYear()} {settings.siteName}. All rights
+                reserved.
+              </span>
+            </div>
+            <span className="text-white/30 text-xs">
+              Developed by{" "}
+              <a
+                href="https://www.mcaforo.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-orange/70 hover:text-orange transition-colors"
+              >
+                Mcaforo
+              </a>
             </span>
           </div>
 
