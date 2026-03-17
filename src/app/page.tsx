@@ -5,7 +5,6 @@ import AboutSection from "@/components/sections/About";
 import ServicesSection from "@/components/sections/Services";
 import StatsSection from "@/components/sections/Stats";
 import TestimonialsSection from "@/components/sections/Testimonials";
-import PartnersSection from "@/components/sections/Partners";
 import CTASection from "@/components/sections/CTA";
 import {
   getSiteSettings,
@@ -13,7 +12,6 @@ import {
   getServices,
   getStats,
   getTestimonials,
-  getPartners,
   getNavItems,
   getFooterColumns,
 } from "@/lib/db";
@@ -21,14 +19,13 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [settings, heroSlides, services, stats, testimonials, partners, navItems, footerColumns] =
+  const [settings, heroSlides, services, stats, testimonials, navItems, footerColumns] =
     await Promise.all([
       getSiteSettings(),
       getHeroSlides(),
       getServices(),
       getStats(),
       getTestimonials(),
-      getPartners(),
       getNavItems(),
       getFooterColumns(),
     ]);
@@ -42,7 +39,6 @@ export default async function Home() {
         <ServicesSection services={services} />
         <StatsSection stats={stats} />
         <TestimonialsSection testimonials={testimonials} />
-        <PartnersSection partners={partners} />
         <CTASection />
       </main>
       <Footer settings={settings} columns={footerColumns} />
